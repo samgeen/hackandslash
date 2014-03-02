@@ -7,6 +7,7 @@ Created on Mar 1, 2014
 import os, copy, readline, textwrap, time, inspect
 import LevelData, Verbs
 
+import cPickle as pik
 from CmdVars import cmdvars
 
 debug = False
@@ -119,6 +120,21 @@ class Game(object):
             if debug:
                 print self._cmdvars.keys()
                 raise
+            
+    def Save(self, filename):
+        builtin = self._cmdvars["__builtins__"]
+        self._cmdvars["__builtins__"] = None
+        f = open(filename+".sav","wb")
+        pik.dump(self._cmdvars, f)
+        self._cmdvars["__builtins__"] = builtin
+        f.close()
+        
+    def Load(self, filename):
+        builtin = self._cmdvars["__builtins__"]
+        f = open(filename+".sav","rb")
+        self._cmdvars = pik.load(f)
+        self._cmdvars["__builtins__"] = builtin
+        f.close()
 
 def run():
     if os.path.exists("cmdhistory.dat"):
