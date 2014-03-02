@@ -1,0 +1,7 @@
+python hackandslash.py
+execfile("hackandslash.py")
+print execfile("hackandslash.py")
+variables = {}
+print execfile("hackandslash.py", variables)
+print variables
+print variables.keys()
