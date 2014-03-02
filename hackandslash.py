@@ -4,8 +4,8 @@ Created on Mar 1, 2014
 @author: sgeen
 '''
 
-import LevelData, Verbs
-import os, copy, readline, textwrap
+import LevelData, Verbs, Animals
+import os, copy, readline, textwrap, time
 
 debug = False
 
@@ -24,14 +24,14 @@ Created on Mar 01, 2014
 @generator: python2.7
 '''
 titletext = speech+titletext+speech
-coolanimal = "llama"
+coolanimal = Animals.Llama()
 
 cmdvars = {"punk": Player(),
            "coolanimal": coolanimal,
            "level": None}
 
 parsevars = {"$PLAYERNAME": "punk.Name()",
-            "$COOLANIMAL": "coolanimal"}
+            "$COOLANIMAL": "coolanimal.Name()"}
 
 class Game(object):
     '''
@@ -56,7 +56,8 @@ class Game(object):
         TODO: MAKE THIS WORK BETTER
         '''
         if dead:
-            print "\nYou,", str(self._cmdvars["punk"].Name())+", are cyberdead. Let's try that one again..."
+            print "\nYou,", str(self._cmdvars["punk"].Name())+", are cyberdead. Let's try that one again."
+            time.sleep(2.0)
             print "------------"
         self._cmdvars = cmdvars
         self._parsevars = parsevars

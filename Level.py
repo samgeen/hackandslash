@@ -16,9 +16,13 @@ class Level(object):
         '''
         self._text = ""
         self._look = ""
+        self._death = ""
         
     def Text(self):
         return self._text
     
     def Look(self):
         return self._look
+    
+    def Death(self):
+        return self._death
