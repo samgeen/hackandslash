@@ -5,3 +5,7 @@ variables = {}
 print execfile("hackandslash.py", variables)
 print variables
 print variables.keys()
+jump
+jump()
+talk()
+talk(coolanimal)

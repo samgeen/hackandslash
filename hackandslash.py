@@ -4,17 +4,13 @@ Created on Mar 1, 2014
 @author: sgeen
 '''
 
-import LevelData, Verbs, Animals
-import os, copy, readline, textwrap, time
+import os, copy, readline, textwrap, time, inspect
+import LevelData, Verbs
+
+from CmdVars import cmdvars
 
 debug = False
 
-class Player(object):
-    def __init__(self):
-        self._name = "punk"
-        
-    def Name(self):
-        return self._name
 
 speech = r"'''"
 titletext = '''
@@ -23,15 +19,11 @@ Created on Mar 01, 2014
 @author: Sam Geen
 @generator: python2.7
 '''
-titletext = speech+titletext+speech
-coolanimal = Animals.Llama()
 
-cmdvars = {"punk": Player(),
-           "coolanimal": coolanimal,
-           "level": None}
+titletext = speech+titletext+speech
 
 parsevars = {"$PLAYERNAME": "punk.Name()",
-            "$COOLANIMAL": "coolanimal.Name()"}
+            "$ANIMALNAME": "str(animalname)"}
 
 class Game(object):
     '''
@@ -40,9 +32,9 @@ class Game(object):
     def __init__(self):
         self._cmdvars = None
         self._parsevars = None
-        self._verbs = None
 
     def Start(self):
+        Verbs.game = self
         print titletext
         self.Restart(dead=False)
         while 1:
@@ -53,17 +45,24 @@ class Game(object):
     def Restart(self, dead=True):
         '''
         Restart the game
-        TODO: MAKE THIS WORK BETTER
+        TODO: MAKE THIS WORK BETTER RE: OBJECT RELOADING, ETC
         '''
         if dead:
             print "\nYou,", str(self._cmdvars["punk"].Name())+", are cyberdead. Let's try that one again."
             time.sleep(2.0)
             print "------------"
         self._cmdvars = cmdvars
+        codeObj = compile("from Verbs import "+self._VerbList(), "<string>", "exec")
+        exec codeObj in self._cmdvars
         self._parsevars = parsevars
-        self._verbs = Verbs.Verbs(self)
-        cmdvars["verbs"] = self._verbs
         self.ChangeLevel(LevelData.intro)
+        
+    def _VerbList(self):
+        funcs = inspect.getmembers(Verbs, inspect.isfunction)
+        names = list()
+        for func, pointer in funcs:
+            names.append(func)
+        return ", ".join(names)
         
     def Level(self):
         return self._cmdvars["level"]
@@ -91,22 +90,22 @@ class Game(object):
         # Check for null string
         if len(uin) == 0:
             return True
-        verbs = dir(self._verbs)
+        verbs = dir(Verbs)
         itemised = filter(None, uin.split(" "))
         first = itemised[0]
         if first in verbs:
-            newcmd = "verbs."+itemised[0]+"(punk"
-            # Add rest of arguments as single string
-            if len(itemised) > 1:
-                newcmd += ","+" ".join(itemised[1:len(itemised)])
-            newcmd += ")"
-            # Run new argument
-            codeObj = compile(newcmd, "<string>", "exec")
-            exec codeObj in self._cmdvars
+            run = uin
+            try:
+                if uin.replace(" ","")[len(first)] == "(":
+                    pass
+            except:
+                run = "print "+first
+            codeObj = compile(run, "<string>", "exec")
+            exec codeObj in self._cmdvars, self._cmdvars
             return True
         else:
             return False
-
+    
     def Interpret(self, uin):
         # Undo Python easteregg
         #if "import antigravity" in uin:
@@ -114,11 +113,12 @@ class Game(object):
         try:
             if not self.ParseVerb(uin):
                 codeObj = compile(uin, "<string>", "exec")
-                exec codeObj in self._cmdvars
+                exec codeObj in self._cmdvars, self._cmdvars
         except:
             print "Input failed,", self._cmdvars["punk"].Name()
             if debug:
                 print self._cmdvars.keys()
+                raise
 
 def run():
     if os.path.exists("cmdhistory.dat"):

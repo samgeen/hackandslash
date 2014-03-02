@@ -8,12 +8,14 @@ Created on 2 Mar 2014
 
 from Level import Level
 
+# LEVELS
+
 intro = Level() 
 intro._text = '''You are standing atop a cybertower. The cityscape is a swimming mirage of 
 hot pinks and ice-slick blues. Sirens wail, a dark, dense forest of 
 screaming sine functions. You watch as two cyberogres leap into the 
 bit-choked streets below. The air smells faintly of antifreeze, thermal 
-paste and $COOLANIMAL piss.
+paste and $ANIMALNAME piss.
 
 Just another day for you, $PLAYERNAME, in Cybercity.
 '''
@@ -26,7 +28,7 @@ Weeks later, in hospital, you succumb to the bit rot.'''
 streets = Level()
 streets._text = '''You land on the mean streets of Cybercity. Cars rush past, glittering like rain-flecked pearls in the neon streetlamps, 
 even though it's like noon, because this is cyberpunk and actual sunlight is illegal or something. There are two cyberogres in front of you, 
-having patiently watched you glide to the ground.'''
+having patiently observed you as you glide to the ground.'''
 streets._look = '''The cyberogres look mean! Better hope you have a weapon, $PLAYERNAME, or you're bit-toast.'''
 streets._death = '''You see a bitcoin on the street and bend down to pick it up. You are killed by a combination of crippling deflation, 
 wild value fluctuations and the fevered masturbation fantasies of people who live in the mountains and hide gold under their mattresses.'''
