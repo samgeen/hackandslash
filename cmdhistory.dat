@@ -9,3 +9,4 @@ jump
 jump()
 talk()
 talk(coolanimal)
+save()

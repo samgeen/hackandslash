@@ -62,11 +62,11 @@ def talk(thing):
         print game.ParseText(talkmute)
     
 def save(filename="savefile"):
-    print savetext
+    print game.ParseText(savetext)
     game.Save(filename)
 
 def load(filename="savefile"):
-    print loadtext
+    print game.ParseText(loadtext)
     game.Load(filename)
     time.sleep(2)
     print game.ParseText(game.Level().Text())
