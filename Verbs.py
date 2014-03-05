@@ -5,7 +5,7 @@ Created on 2 Mar 2014
 '''
 
 import sys, inspect, time
-import LevelData, Animals, Eat, Talk, Use, Get
+import LevelData, Animals, Eat, Talk, Use, Get, Examine
         
 game = None
 
@@ -60,6 +60,12 @@ def look():
     Inspect your surroundings! Examine for clues!
     '''
     print game.ParseText(game.Level().Look())
+    
+def examine(thing):
+    '''
+    Look in more detail at a thing
+    '''
+    Examine.examine(thing)
     
 def holiday():
     '''
@@ -134,5 +140,10 @@ def exit():
     '''
     game.Exit()
     
+def animalnames():
+    '''
+    A list of animal names
+    '''
+    print Animals.names
 #def __str__(self):
 #    return str(dir(self))

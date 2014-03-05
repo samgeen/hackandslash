@@ -5,7 +5,7 @@ Created on Mar 1, 2014
 '''
 
 import os, copy, readline, textwrap, time, inspect
-import LevelData, Verbs, Eat, Talk, Use, Get
+import LevelData, Verbs, Eat, Talk, Use, Get, Animals, Examine
 
 import cPickle as pik
 from CmdVars import cmdvars
@@ -41,6 +41,8 @@ class Game(object):
         Talk.game = self
         Use.game = self
         Get.game = self
+        Animals.game = self
+        Examine.game = self
         print titletext
         self.Restart(dead=False)
         while self._loop:
@@ -58,7 +60,6 @@ class Game(object):
             time.sleep(2.0)
             print "------------"
         self._cmdvars = cmdvars
-        self._cmdvars["inventory"] = ["sword", "haxsnax"]
         codeObj = compile("from Verbs import "+self._VerbList(), "<string>", "exec")
         exec codeObj in self._cmdvars
         self._parsevars = parsevars
@@ -80,6 +81,7 @@ class Game(object):
         '''
         self._cmdvars["level"] = newLevel
         print self.ParseText(self._cmdvars["level"].Text())
+        newLevel.Setup(self)
         print "Your inventory holds: ", self._cmdvars["inventory"]
         
     def ParseText(self, text):

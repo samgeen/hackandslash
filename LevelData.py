@@ -6,6 +6,7 @@ Created on 2 Mar 2014
 @author: samgeen
 '''
 
+import Animals
 from Level import Level
 
 # LEVELS
@@ -24,6 +25,12 @@ traffic appearing and disappearing like ones and zeroes in the bitstream, insert
 hacking fingers itchy from underuse, ready for a fight. Just another day in Cybercity. Except it looks like it's night because cyberpunk.'''
 intro._death = '''A cyberpigeon craps on you, rancid droppings seeping into a cut inflicted by the barber as they shaved your cool cyber-do. 
 Weeks later, in hospital, you succumb to the bit rot.'''
+def introsetup(game):
+    game.Vars()["inventory"] = ["sword", "haxsnax"]
+intro.Setup = introsetup
+
+# -------------------------------------------------- #
+
 
 streets = Level("streets")
 streets._text = '''You land on the mean streets of Cybercity. Cars rush past, glittering like rain-flecked pearls in the neon streetlamps, 
@@ -32,3 +39,7 @@ having patiently observed you as you glide to the ground.'''
 streets._look = '''The cyberogres look mean! Better hope you have a weapon, $PLAYERNAME, or you're bit-toast.'''
 streets._death = '''You see a bitcoin on the street and bend down to pick it up. You are killed by a combination of crippling deflation, 
 wild value fluctuations and the fevered masturbation fantasies of people who live in the mountains and hide gold under their mattresses.'''
+def streetssetup(game):
+    game.Vars().append(Animals.MakeAnimal("cyberogres"))
+    game.Vars().append(Animals.MakeAnimal(game.Vars()["animalname"]))
+streets.Setup = streetssetup

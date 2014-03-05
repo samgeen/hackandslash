@@ -4,11 +4,16 @@ Created on 2 Mar 2014
 @author: samgeen
 '''
 
+game = None
+names = ["llama", "t-rex", "cyberogres"]
+
 def MakeAnimal(name):
     if name == "llama":
         return Llama()
     elif name == "t-rex":
         return TRex()
+    elif name == "cyberogres":
+        return CyberOgres()
     else:
         print "Animal name not recognised!"
 
@@ -27,7 +32,7 @@ It chews on something, though you're not sure what.'''
         return self._name
     
     def Talk(self):
-        return self._speech
+        print game.ParseText(self._speech)
     
     def __str__(self):
         return self._name
@@ -50,9 +55,10 @@ You're unsure why there should be a t-rex here, but presumably someone put it th
     
     def Talk(self):
         if self._hungry:
-            return self._speechHungry
+            print game.ParseText(self._speechHungry)
+            game.Restart()
         else:
-            return self._speechFull
+            print game.ParseText(self._speechFull)
     
     def Hungry(self, newhunger = None):
         if not newhunger is None:
@@ -67,3 +73,31 @@ You're unsure why there should be a t-rex here, but presumably someone put it th
             return "It eyes you with a hungry gaze. "
         else:
             return "It burps, its hunger sated. "
+
+class Cyberogres(object):
+    def __init__(self):
+        self._name = "cyberogres"
+        self._speech = '''The cyberogres grunt. "Big mistake following us, $PLAYERNAME. 
+Our master Groknar says we gotta kill you now. Nothing personal, you understand."'''
+        self._speechWin = '''The cyberogres look surprised. "Oh, sorry, Groknar. Didn't see you there." 
+Appeased, they slink off into the shadows. I guess this means you win.'''
+        self._look = '''The cyberogres are mean fighters. Covered from head to toe in bitarmour, it's gonna take 
+a tough cyberwarrior to bring them down. Luckily, you know scripting. You do that beckoning thing with your hand, but
+it's been like 15 years since The Matrix came out and they don't get it so you just look like a doofus.'''
+        
+    def Look(self):
+        return self._look
+        
+    def Name(self):
+        return self._name
+    
+    def Talk(self):
+        if game.punk.Name().lower() != "groknar":
+            print game.ParseText(self._speech)
+        else:
+            print game.ParseText(self._speechWin)
+            game.Win()
+            
+    
+    def __str__(self):
+        return self._name
