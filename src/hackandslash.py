@@ -4,8 +4,17 @@ Created on Mar 1, 2014
 @author: sgeen
 '''
 
-import os, copy, readline, textwrap, time, inspect
-import LevelData, Verbs, Eat, Talk, Use, Get, Animals, Examine, antigravity, CmdVars, Level
+
+import os, copy, textwrap, time, inspect
+import LevelData, Verbs, Eat, Talk, Use, Get, Animals, Examine
+import CmdVars, antigravity, Level
+
+if os.name != "posix":
+    import pyreadline
+    from pyreadline.rlmain import Readline
+    readline = Readline()
+else:
+    import readline
 
 import cPickle as pik
 from CmdVars import cmdvars
@@ -127,6 +136,9 @@ class Game(object):
     
     def Interpret(self, uin):
         try:
+            if "import antigravity" in uin:
+                print '''You import antigravity. The soles of your feet begin to lift from the floor. 
+Newton can kiss my ass, you think. Kiss my cyberass.'''
             if not self.ParseVerb(uin):
                 codeObj = compile(uin, "<string>", "exec")
                 exec codeObj in self._cmdvars, self._cmdvars

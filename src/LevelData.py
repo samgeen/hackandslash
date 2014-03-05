@@ -26,7 +26,14 @@ hacking fingers itchy from underuse, ready for a fight. Just another day in Cybe
 intro._death = '''A cyberpigeon craps on you, rancid droppings seeping into a cut inflicted by the barber as they shaved your cool cyber-do. 
 Weeks later, in hospital, you succumb to the bit rot.'''
 def introsetup(game):
-    game.Vars()["inventory"] = ["sword", "haxsnax"]
+    vars = game.Vars()
+    vars["inventory"] = ["sword", "haxsnax"]
+    if "trex" in vars:
+        vars.pop("trex")
+    if "cyberogres" in vars:
+        vars.pop("cyberogres")
+    if "llama" in vars:
+        vars.pop("llama")
 intro.Setup = introsetup
 
 # -------------------------------------------------- #

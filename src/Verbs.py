@@ -45,7 +45,7 @@ def jump():
     Leap!
     '''
     if game.Level().Name() == "intro":
-        if not "antigravity" in sys.modules.keys():
+        if not "antigravity" in game.Vars():
             if game.DeathCount() < 2:
                 print game.ParseText(jumpdead)
             else:
@@ -55,7 +55,7 @@ def jump():
             print game.ParseText(jumplive)
             game.ChangeLevel(LevelData.streets)
     else:
-        game.ParseText(jumpnull)
+        print game.ParseText(jumpnull)
         
 def leap():
     '''

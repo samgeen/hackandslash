@@ -1,17 +1,3 @@
-python hackandslash.py
-execfile("hackandslash.py")
-print execfile("hackandslash.py")
-variables = {}
-print execfile("hackandslash.py", variables)
-print variables
-print variables.keys()
-jump
+jump(0
 jump()
-talk()
-talk(coolanimal)
-save()
-dir(punk)
-print dir(punk)
-help(player)
-help(punk)
-print dir()
+import antigravity

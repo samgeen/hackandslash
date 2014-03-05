@@ -31,8 +31,8 @@ def use(thinga, thingb):
                 print game.ParseText('''You mount the llama. Your mighty steed charges the cyberogres, 
 killing one with a blow from its hooves. You slay the second with a slash of your cybersword. You are victorious!''')
                 game.Win()
-            elif "t-rex" in game.Inventory():
-                print game.ParseText('''You mount the t-rex and raise your sword towards you foes. 
+            elif "trex" in game.Inventory():
+                print game.ParseText('''You mount the trex and raise your sword towards you foes. 
 It charges them down, swallowing them both with a mighty gulp. You are victorious!''')
                 game.Win()
             else:
@@ -48,8 +48,8 @@ crushes your skull. You needed that skull! Man.''')
             print game.ParseText('''Why would you... uh, whatever. You stab the llama and it dies. Monster.'''+modstr)
             Get.RemoveFromInventory(thingb)
             return
-        if strb == "t-rex":
-            print game.ParseText('''You brandish the sword at the t-rex. The t-rex is having none of that and eats you.''')
+        if strb == "trex":
+            print game.ParseText('''You brandish the sword at the trex. The trex is having none of that and eats you.''')
             game.Restart()
     if stra == "llama":
         if strb == "cyberogres":
@@ -59,8 +59,8 @@ crushes your skull. You needed that skull! Man.''')
         if strb == "sword":
             print game.ParseText('''The llama looks at the sword, but doesn't quite understand how that might work.''')
             return
-        if strb == "t-rex":
-            print game.ParseText('''The t-rex eats the llama. Monster.'''+modstr)
+        if strb == "trex":
+            print game.ParseText('''The trex eats the llama. Monster.'''+modstr)
             Get.RemoveFromInventory(thinga)
             return
         if strb == "player":
@@ -82,23 +82,23 @@ crushes your skull. You needed that skull! Man.''')
             print game.ParseText("So you decide to give two dangerous cyberogres your only weapon. Whatever, it's your adventure.")
             Get.RemoveFromInventory(thingb)
             return
-    if stra == "t-rex":
+    if stra == "trex":
         if strb == "llama":
             use(thingb, thinga)
             return
         if strb == "haxsnax":
-            print game.ParseText("The t-rex chomps down the haxsnax. It is hungry no more! Success. Cybersuccess.")
+            print game.ParseText("The trex chomps down the haxsnax. It is hungry no more! Success. Cybersuccess.")
             Get.RemoveFromInventory(thingb)
             thinga.Hungry(False)
             return
         if strb == "sword":
-            print game.ParseText("The t-rex's arms are too small to use the sword. Alas.")
+            print game.ParseText("The trex's arms are too small to use the sword. Alas.")
             return
         if strb == "cyberogres":
-            print game.ParseText("The t-rex eats the cyberogres. This is incredibly grizzly to watch, but, uh, victory, I guess?")
+            print game.ParseText("The trex eats the cyberogres. This is incredibly grizzly to watch, but, uh, victory, I guess?")
             game.Win()
     if stra == "haxsnax":
-        if strb == "llama" or strb == "t-rex" or strb == "cyberogres":
+        if strb == "llama" or strb == "trex" or strb == "cyberogres":
             use(thingb, thinga)
             return
         if strb == "player":

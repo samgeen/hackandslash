@@ -8,7 +8,7 @@ game = None
 
 '''
 cyberogres
-t-rex
+trex
 llama
 haxsnax
 sword
@@ -20,7 +20,7 @@ def examine(thing):
     if not _checkexists(strthing):
         print game.ParseText("That thing doesn't seem to exist. Weird.")
         return
-    elif strthing == "cyberogres" or strthing == "t-rex" or strthing == "llama":
+    elif strthing == "cyberogres" or strthing == "trex" or strthing == "llama":
         print game.ParseText(thing.Examine())
     elif strthing == "player":
         print game.ParseText("You are the sexy, quick-thinking hacker $PLAYERNAME")

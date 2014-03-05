@@ -5,12 +5,12 @@ Created on 2 Mar 2014
 '''
 
 game = None
-names = ["llama", "t-rex", "cyberogres"]
+names = ["llama", "trex", "cyberogres"]
 
 def MakeAnimal(name):
     if name == "llama":
         return Llama()
-    elif name == "t-rex":
+    elif name == "trex":
         return TRex()
     elif name == "cyberogres":
         return CyberOgres()
@@ -39,13 +39,13 @@ It chews on something, though you're not sure what.'''
 
 class TRex(object):
     def __init__(self):
-        self._name = "t-rex"
+        self._name = "trex"
         self._hungry = True
-        self._speechHungry = '''The t-rex eyes you with suspicion. Wait, no, that's not suspicion, that's not suspic-. 
-"Burp", says the T-Rex. You did not think this through, did you $PLAYERNAME? You did not think this through at all.'''
-        self._speechFull = '''You wink at the t-rex. The t-rex winks at you. Can you high-five a t-rex? TURNS OUT YOU CAN.'''
+        self._speechHungry = '''The trex eyes you with suspicion. Wait, no, that's not suspicion, that's not suspic-. 
+"Burp", says the trex. You did not think this through, did you $PLAYERNAME? You did not think this through at all.'''
+        self._speechFull = '''You wink at the trex. The trex winks at you. Can you high-five a trex? TURNS OUT YOU CAN.'''
         self._look = '''The 13 foot tall carnivore stands in a side-street. '''+self._HungerText()+'''
-You're unsure why there should be a t-rex here, but presumably someone put it there. Yours not to question why, you suppose.'''
+You're unsure why there should be a trex here, but presumably someone put it there. Yours not to question why, you suppose.'''
         
     def Name(self):
         return self._name

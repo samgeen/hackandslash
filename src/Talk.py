@@ -10,6 +10,6 @@ talkmute = "This thing can't talk. Or maybe it can, but doesn't want to. Either 
 
 def talk(thing):
     try:
-        print game.ParseText(thing.Talk())
+        thing.Talk()
     except:
         print game.ParseText(talkmute)
