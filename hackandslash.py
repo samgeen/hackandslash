@@ -5,7 +5,7 @@ Created on Mar 1, 2014
 '''
 
 import os, copy, readline, textwrap, time, inspect
-import LevelData, Verbs
+import LevelData, Verbs, Eat, Talk, Use, Get
 
 import cPickle as pik
 from CmdVars import cmdvars
@@ -33,12 +33,17 @@ class Game(object):
     def __init__(self):
         self._cmdvars = None
         self._parsevars = None
+        self._loop = True
 
     def Start(self):
         Verbs.game = self
+        Eat.game = self
+        Talk.game = self
+        Use.game = self
+        Get.game = self
         print titletext
         self.Restart(dead=False)
-        while 1:
+        while self._loop:
             uin = raw_input("> ")
             readline.write_history_file("cmdhistory.dat")
             self.Interpret(uin)
@@ -53,6 +58,7 @@ class Game(object):
             time.sleep(2.0)
             print "------------"
         self._cmdvars = cmdvars
+        self._cmdvars["inventory"] = ["sword"]
         codeObj = compile("from Verbs import "+self._VerbList(), "<string>", "exec")
         exec codeObj in self._cmdvars
         self._parsevars = parsevars
@@ -74,6 +80,7 @@ class Game(object):
         '''
         self._cmdvars["level"] = newLevel
         print self.ParseText(self._cmdvars["level"].Text())
+        print "Your inventory holds: ", self._cmdvars["inventory"]
         
     def ParseText(self, text):
         newtext = copy.copy(text)
@@ -108,9 +115,6 @@ class Game(object):
             return False
     
     def Interpret(self, uin):
-        # Undo Python easteregg
-        #if "import antigravity" in uin:
-        #    uin = "import antigrav"
         try:
             if not self.ParseVerb(uin):
                 codeObj = compile(uin, "<string>", "exec")
@@ -135,6 +139,33 @@ class Game(object):
         self._cmdvars = pik.load(f)
         self._cmdvars["__builtins__"] = builtin
         f.close()
+        
+    def Inventory(self):
+        return self._cmdvars["inventory"]
+    
+    def Win(self):
+        win = "YOU WIN! Yay, $PLAYERNAME! Want to try again? y/n"
+        print self.ParseText(win)
+        loop = True
+        while loop:
+            uin = raw_input("> ")
+            choice = uin[0].lower()
+            if choice == "y" or choice == "n":
+                loop = False
+            else:
+                print self.ParseText("You have to type either y or n, $PLAYERNAME. Don't be a dick about it.")
+        if choice == "n":
+            self.Exit()
+        else:
+            self.Restart(dead=False)
+            
+    def Exit(self):
+        print self.ParseText("The cyberstreets are too mean. You bug out of there.")
+        time.sleep(2.5)
+        self._loop = False
+        
+    def Vars(self):
+        return self._cmdvars
 
 def run():
     if os.path.exists("cmdhistory.dat"):

@@ -10,7 +10,7 @@ from Level import Level
 
 # LEVELS
 
-intro = Level() 
+intro = Level("intro") 
 intro._text = '''You are standing atop a cybertower. The cityscape is a swimming mirage of 
 hot pinks and ice-slick blues. Sirens wail, a dark, dense forest of 
 screaming sine functions. You watch as two cyberogres leap into the 
@@ -25,7 +25,7 @@ hacking fingers itchy from underuse, ready for a fight. Just another day in Cybe
 intro._death = '''A cyberpigeon craps on you, rancid droppings seeping into a cut inflicted by the barber as they shaved your cool cyber-do. 
 Weeks later, in hospital, you succumb to the bit rot.'''
 
-streets = Level()
+streets = Level("streets")
 streets._text = '''You land on the mean streets of Cybercity. Cars rush past, glittering like rain-flecked pearls in the neon streetlamps, 
 even though it's like noon, because this is cyberpunk and actual sunlight is illegal or something. There are two cyberogres in front of you, 
 having patiently observed you as you glide to the ground.'''

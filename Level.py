@@ -10,13 +10,17 @@ class Level(object):
     '''
 
 
-    def __init__(self):
+    def __init__(self, name):
         '''
         Constructor
         '''
+        self._name = name
         self._text = ""
         self._look = ""
         self._death = ""
+        
+    def Name(self):
+        return self._name
         
     def Text(self):
         return self._text

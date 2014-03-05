@@ -18,8 +18,12 @@ class Player(object):
             self._name = newname
         return self._name
     
+    def __str__(self):
+        return "player"
+    
 animalname = "llama"
 
 cmdvars = {"punk": Player(),
            "animalname": animalname,
-           "level": None}
+           "level": None,
+           "inventory": []}
