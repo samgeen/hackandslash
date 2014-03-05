@@ -9,6 +9,10 @@ import Get
 
 game = None
 
+modstr = "Shame you don't have a module called Animals imported so you can just spawn another one hint hint."
+if "Animals" in sys.modules.keys():
+    modstr = "Lucky you can just make another one in the Animals module, right?"
+                
 def use(thinga, thingb):
     stra = str(thinga)
     strb = str(thingb)
@@ -41,7 +45,7 @@ crushes your skull. You needed that skull! Man.''')
             print game.ParseText("Uh, you stab yourself. OK.")
             game.Restart()
         if strb == "llama":
-            print game.ParseText('''Why would you... uh, whatever. You stab the llama and it dies. Monster.''')
+            print game.ParseText('''Why would you... uh, whatever. You stab the llama and it dies. Monster.'''+modstr)
             Get.RemoveFromInventory(thingb)
             return
         if strb == "t-rex":
@@ -49,16 +53,13 @@ crushes your skull. You needed that skull! Man.''')
             game.Restart()
     if stra == "llama":
         if strb == "cyberogres":
-            modstr = "Shame you don't have a module called Animals imported so you can just spawn another one hint hint."
-            if "Animals" in sys.modules.keys():
-                print "Lucky you can just make another one in the Animals module, right?"
             print game.ParseText('''The cyberogres rip the llama in two. "LLAAAAAMAAAAAA!" you cry, distraught. '''+modstr)
             return
         if strb == "sword":
             print game.ParseText('''The llama looks at the sword, but doesn't quite understand how that might work.''')
             return
         if strb == "t-rex":
-            print game.ParseText('''The t-rex eats the llama. Monster.''')
+            print game.ParseText('''The t-rex eats the llama. Monster.'''+modstr)
             Get.RemoveFromInventory(thinga)
             return
         if strb == "player":

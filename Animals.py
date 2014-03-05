@@ -25,7 +25,7 @@ The llama spits at you. Dribble gets all up under your hackerglasses. This is yo
         self._look = '''The llama stands unphased by the fast-moving traffic roaring past feet away. Matted white fur ripples in the slipstream.
 It chews on something, though you're not sure what.'''
         
-    def Look(self):
+    def Examine(self):
         return self._look
         
     def Name(self):
@@ -50,7 +50,7 @@ You're unsure why there should be a t-rex here, but presumably someone put it th
     def Name(self):
         return self._name
     
-    def Look(self):
+    def Examine(self):
         return self._look
     
     def Talk(self):
@@ -74,7 +74,7 @@ You're unsure why there should be a t-rex here, but presumably someone put it th
         else:
             return "It burps, its hunger sated. "
 
-class Cyberogres(object):
+class CyberOgres(object):
     def __init__(self):
         self._name = "cyberogres"
         self._speech = '''The cyberogres grunt. "Big mistake following us, $PLAYERNAME. 
@@ -85,7 +85,7 @@ Appeased, they slink off into the shadows. I guess this means you win.'''
 a tough cyberwarrior to bring them down. Luckily, you know scripting. You do that beckoning thing with your hand, but
 it's been like 15 years since The Matrix came out and they don't get it so you just look like a doofus.'''
         
-    def Look(self):
+    def Examine(self):
         return self._look
         
     def Name(self):

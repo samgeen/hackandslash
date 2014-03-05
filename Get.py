@@ -22,13 +22,13 @@ text["cyberogres"] = "In this case 'get' means 'acquire', not 'attack'. And they
 text["fail"] = "Sorry, $PLAYERNAME, I can't let you do that."
 
 def get(thing):
-    if type (thing) == type(""):
-        print "Sorry, you have to enter things that are objects in the world. Try removing the quotation marks?"
-        return
     try:
         strthing = str(thing)
     except:
         strthing = "null"
+    if not _checkexists(strthing):
+        print game.ParseText(text["null"])
+    return
     if strthing in text:
         if strthing == "llama" or strthing == "player":
             print game.ParseText(text[strthing])
@@ -62,3 +62,9 @@ def MoveToInventory(thing):
 def RemoveFromInventory(thing):
     if str(thing) in game.Inventory():
         game.Inventory().remove(str(thing))
+
+def _checkexists(strthing):
+    for item in game.Vars():
+        if str(item) == strthing:
+            return True
+    return False
