@@ -1,0 +1,10 @@
+('/home/samgeen/Programming/MakeWee/workspace/hackandslash/build/linux/dist/hackandslash',
+ True,
+ False,
+ None,
+ None,
+ [],
+ None,
+ True,
+ 0,
+ 1394037067)
