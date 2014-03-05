@@ -7,8 +7,10 @@ Created on 2 Mar 2014
 def MakeAnimal(name):
     if name == "llama":
         return Llama()
-    if name == "t-rex":
+    elif name == "t-rex":
         return TRex()
+    else:
+        print "Animal name not recognised!"
 
 class Llama(object):
     def __init__(self):
@@ -52,7 +54,9 @@ You're unsure why there should be a t-rex here, but presumably someone put it th
         else:
             return self._speechFull
     
-    def Hungry(self):
+    def Hungry(self, newhunger = None):
+        if not newhunger is None:
+            self._hungry = newhunger
         return self._hungry
         
     def __str__(self):

@@ -5,7 +5,7 @@ Created on 2 Mar 2014
 '''
 
 import sys, inspect, time
-import LevelData, Eat, Talk, Use, Get
+import LevelData, Animals, Eat, Talk, Use, Get
         
 game = None
 
@@ -24,9 +24,13 @@ holidaydead = '''Stressed out by the cyberlife of the hacker, you book a pleasan
 one day, you come across a strange shell. As you bend down to pick up the shell, a shark leaps out of the water, inches across the beach with its flippers, and 
 tears you apart with its razor-sharp teeth. Later, the shark is killed by heavy metal poisoning from your implanted hackerdeck. Such is the cycle of life.'''
 
-        
 savetext = '''You feel a slight judder, then nothing, the world slipping back into place, unchanged. 
 You tap your pockets; everything is there, even your haxsnax. And yet - somehow the world feels safer, like you could leap from the tallest
+cyberscraper and wake up the next morning, right as rain. You smile, and hum the theme tune to Deus Ex.'''
+
+savetextnohax = '''You feel a slight judder, then nothing, the world slipping back into place, unchanged. 
+You tap your pockets; everything is there, even- well, your haxsnax are gone, but you think maybe those got eaten. 
+And yet - somehow the world feels safer, like you could leap from the tallest
 cyberscraper and wake up the next morning, right as rain. You smile, and hum the theme tune to Deus Ex.'''
         
 loadtext = '''The world shudders, the sky turning to wireframe, then vanishing, a wall of black rushing to greet you and-'''
@@ -108,7 +112,10 @@ def save(filename="savefile"):
     Save the game state
     Input: save file name (default: "savefile")
     '''
-    print game.ParseText(savetext)
+    if "haxsnax" in game.Inventory():
+        print game.ParseText(savetext)
+    else:
+        print game.ParseText(savetextnohax)
     game.Save(filename)
 
 def load(filename="savefile"):

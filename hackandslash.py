@@ -58,7 +58,7 @@ class Game(object):
             time.sleep(2.0)
             print "------------"
         self._cmdvars = cmdvars
-        self._cmdvars["inventory"] = ["sword"]
+        self._cmdvars["inventory"] = ["sword", "haxsnax"]
         codeObj = compile("from Verbs import "+self._VerbList(), "<string>", "exec")
         exec codeObj in self._cmdvars
         self._parsevars = parsevars

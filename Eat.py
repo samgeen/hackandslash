@@ -4,6 +4,8 @@ Created on 5 Mar 2014
 @author: samgeen
 '''
 
+import Get
+
 game = None
 
 text = {}
@@ -31,3 +33,4 @@ scarf it off the floor, $PLAYERNAME? For serious.''')
         game.Restart()
     if strthing in win:
         game.Win()
+    Get.RemoveFromInventory(thing)
