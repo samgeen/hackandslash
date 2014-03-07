@@ -9,10 +9,14 @@ import os, copy, textwrap, time, inspect
 import LevelData, Verbs, Eat, Talk, Use, Get, Animals, Examine
 import CmdVars, antigravity, Level
 
+hasrl = True
 if os.name != "posix":
-    import pyreadline
-    from pyreadline.rlmain import Readline
-    readline = Readline()
+    try:
+        import pyreadline
+        from pyreadline.rlmain import Readline
+        readline = Readline()
+    except:
+        hasrl = False # readline bugged out; turn off
 else:
     import readline
 
@@ -57,7 +61,8 @@ class Game(object):
         self.Restart(dead=False)
         while self._loop:
             uin = raw_input("> ")
-            readline.write_history_file("cmdhistory.dat")
+            if hasrl:
+                readline.write_history_file("cmdhistory.dat")
             self.Interpret(uin)
             
     def Restart(self, dead=True):
@@ -194,8 +199,9 @@ Newton can kiss my ass, you think. Kiss my cyberass.'''
         return self._deathCount
 
 def run():
-    if os.path.exists("cmdhistory.dat"):
-        readline.read_history_file("cmdhistory.dat")
+    if hasrl:
+        if os.path.exists("cmdhistory.dat"):
+            readline.read_history_file("cmdhistory.dat")
     game = Game()
     game.Start()
 
